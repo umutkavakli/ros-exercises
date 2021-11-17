@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="turtlesim" type="turtlesim_node" name="turtlesim" output="screen"/>
+	<node pkg="my_package" type="primitive_cleaner.py" name="turtlesim_motion_pose" output="screen"/>
+</launch>
