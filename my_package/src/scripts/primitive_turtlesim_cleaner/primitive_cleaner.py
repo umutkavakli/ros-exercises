@@ -11,7 +11,7 @@ x = 0
 y = 0
 yaw = 0
 
-def move(velocity_publisher, speed, distance, is_forward=True):
+def move(velocity_publisher, speed, distance, is_forward):
     velocity = Twist()
 
     global x, y
@@ -39,7 +39,7 @@ def move(velocity_publisher, speed, distance, is_forward=True):
     velocity.linear.x = 0
     velocity_publisher.publish(velocity)
 
-def rotate(velocity_publisher, angular_speed_degree, relative_speed_degree, clockwise=False):
+def rotate(velocity_publisher, angular_speed_degree, relative_speed_degree, clockwise):
     velocity = Twist()
     angular_speed = math.radians(abs(angular_speed_degree))
 
@@ -99,6 +99,8 @@ def setDesiredOrientation(publisher, speed_in_degree, desired_angle_degree):
 
     if relative_angle_radians < 0:
         clockwise = 1
+    else: 
+        clockwise = 0
     
     print("Relative_angle_radians: ", math.degrees(relative_angle_radians))
     print("desired_angle_degree: ", desired_angle_degree)
@@ -109,7 +111,7 @@ def spiral(velocity_publisher, rk, wk):
     rate = rospy.Rate(1)
 
     while (x < 10.5) and (y < 10.5):
-        rk += 0.5
+        rk = rk + 0.5
         velocity.linear.x = rk
         velocity.linear.y = 0
         velocity.linear.z = 0
